@@ -18,7 +18,7 @@ dependencies:
   flutter_background_service_android: 
     git:
       url: https://github.com/rivafarabi/flutter_background_service_android.git
-      ref: master
+      ref: single-package
   flutter_background_service_ios: ^5.0.3
 dev_dependencies:
   flutter_test:
