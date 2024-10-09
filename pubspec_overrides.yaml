@@ -1,0 +1,8 @@
+# melos_managed_dependency_overrides: flutter_background_service_android,flutter_background_service_ios,flutter_background_service_platform_interface
+dependency_overrides:
+  flutter_background_service_android:
+    path: ..\\flutter_background_service_android
+  flutter_background_service_ios:
+    path: ..\\flutter_background_service_ios
+  flutter_background_service_platform_interface:
+    path: ..\\flutter_background_service_platform_interface

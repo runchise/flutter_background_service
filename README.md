@@ -15,11 +15,11 @@ A flutter plugin for execute dart code in background.
 > - in android/build.gradle ```ext.kotlin_version = '1.8.10'```
 > - in android/gradle/wrapper/gradle-wrapper.properties ```distributionUrl=https\://services.gradle.org/distributions/gradle-7.5-all.zip```
 
-### Configuration required for Foreground Services on Android 14+ (SDK 34)
+### Configuration required for Foreground Services on Android 14 (SDK 34)
 
 Applications that target SDK 34 and use foreground services need to include some additional configuration to declare the type of foreground service they use:
 
-* Determine the type or types of foreground service your app requires by consulting [the documentation](https://developer.android.com/about/versions/14/changes/fgs-types-required)
+* Determine the type of foreground service your app requires by consulting [the documentation](https://developer.android.com/about/versions/14/changes/fgs-types-required)
 
 * Add the corresponding permission to your `android/app/src/main/AndroidManifest.xml` file:
 
@@ -30,10 +30,6 @@ Applications that target SDK 34 and use foreground services need to include some
   <!--
     Permission to use here depends on the value you picked for foregroundServiceType - see the Android documentation.
     Eg, if you picked 'location', use 'android.permission.FOREGROUND_SERVICE_LOCATION'
-  -->
-  <!--
-    If you need more than 1 type, you must separate each type by a pipe(|) symbol - see the Android documentation.
-    Eg, android:foregroundServiceType="location|mediaPlayback"
   -->
   <uses-permission android:name="android.permission.FOREGROUND_SERVICE_..." />
   <application
@@ -50,7 +46,7 @@ Applications that target SDK 34 and use foreground services need to include some
         <!--Add this-->
         <service
             android:name="id.flutter.flutter_background_service.BackgroundService"
-            android:foregroundServiceType="WhatForegroundServiceTypesDoYouWant"
+            android:foregroundServiceType="WhatForegroundServiceTypeDoYouWant"
         />
         <!--end-->
 
@@ -60,23 +56,8 @@ Applications that target SDK 34 and use foreground services need to include some
 </manifest>
 ```
 
-* Add the corresponding foreground service types to your AndroidConfiguration class:
-```dart
-await service.configure(
-    // IOS configuration
-    androidConfiguration: AndroidConfiguration(
-      ...
-      // Add this
-      foregroundServiceTypes: [AndroidForegroundType.WhatForegroundServiceTypeDoYouWant]
-      // Example:
-      // foregroundServiceTypes: [AndroidForegroundType.mediaPlayback]
-    ),
-  );
-```
-
 > **WARNING**:
 > * YOU MUST MAKE SURE ANY REQUIRED PERMISSIONS TO BE GRANTED BEFORE YOU START THE SERVICE
-> * THE TYPES YOU PUT IN foregroundServiceTypes, MUST BE DECLARED IN MANIFEST
 
 
 ### Using custom notification for Foreground Service
