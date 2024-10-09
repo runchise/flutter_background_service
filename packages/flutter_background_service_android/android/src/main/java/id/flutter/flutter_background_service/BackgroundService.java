@@ -28,6 +28,8 @@ import androidx.core.app.ServiceCompat;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ObjectInputFilter.Config;
+import java.nio.channels.Pipe;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -257,9 +259,8 @@ public class BackgroundService extends Service implements MethodChannel.MethodCa
 
     @Override
     public void onTaskRemoved(Intent rootIntent) {
-        if (isRunning.get()) {
-            WatchdogReceiver.enqueue(getApplicationContext(), 1000);
-        }
+        super.onTaskRemoved(rootIntent);
+        this.stopSelf();
     }
 
     @Override
